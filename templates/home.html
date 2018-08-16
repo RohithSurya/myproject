@@ -1,14 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Boards</title>
-</head>
-<body>
-<h1>Boards</h1>
-{% for board in boards %}
-    {{ board.name }}<br>
-{% endfor %}
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Boards</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Board</th>
+            <th>Posts</th>
+            <th>Topics</th>
+            <th>Last Post</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for board in boards %}
+            <tr>
+                <td><a href="{% url 'board_topics' pk=board.pk %}">{{ board.name }}</a><br>
+                    <small class="text-muted d-block">{{ board.description }}</small>
+                </td>
+                <td class="align-middle">0</td>
+                <td class="align-middle">0</td>
+                <td class="align-middle"></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
